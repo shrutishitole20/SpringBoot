@@ -1,0 +1,245 @@
+Spring Boot Backend – Folder Structure and Important Concepts
+---1. Main Backend Folders
+
+1. config – Application Configuration
+This folder contains configuration classes that define how your Spring Boot application should work.
+
+Examples:
+- CORS configuration.
+- Bean configuration.
+- Swagger/OpenAPI configuration.
+- Application-wide settings.
+
+
+2. controller – Handle API Requests
+- Handles HTTP requests and responses.
+- This is the entry point of your backend APIs.
+- This is where we create REST APIs.
+- The controller receives requests from the frontend or Postman.
+Example:
+
+When a user wants to log in:
+
+POST /api/auth/login
+
+What happens here?
+- @RestController: Identifies the class as a REST API controller.
+- @RequestMapping: Defines the common API URL.
+- @PostMapping: Handles POST requests.
+- @RequestBody: Receives JSON data.
+- ResponseEntity: Sends an HTTP response.
+
+
+
+3. dto – Data Transfer Object
+Transfers data between the frontend and backend.
+
+Why do we need DTO?
+- Controls which data the frontend can send.
+- Avoids exposing sensitive database fields.
+- Makes input validation easier.
+- Separates API request/response formats from database structure.
+
+
+
+4. exception – Error Handling
+This folder handles errors in your backend.
+- Helps return meaningful error responses.
+- Avoids unexpected server errors.
+- Displays meaningful error messages to users.
+
+
+
+5. model – Database Entities
+This folder contains Java classes representing your database entities (tables).
+
+For example:
+- User
+- Doctor
+- Appointment
+- Patient
+
+
+
+6. repository – Database Operations
+This folder communicates with the database through Spring Data JPA.
+
+It handles database operations such as:
+- Saving data.
+- Retrieving data.
+- Updating data.
+- Deleting data.
+
+
+
+7. security – Authentication and Authorization
+This folder generally contains authentication and authorization-related code.
+
+It protects your backend APIs.
+
+What do we handle here?
+- JWT token generation.
+- JWT token validation.
+- JWT authentication filter.
+- Custom UserDetailsService.
+- Password authentication.
+- User roles and permissions.
+- Login and logout.
+- Password encryption.
+- Role-based authorization.
+- Protected APIs.
+Important example:
+
+One person can access only their own information but should not be allowed to access another person's private information.
+
+
+
+
+8. service – Business Logic
+This is one of the most important folders in your backend.
+
+It handles the business logic of your application.
+
+Example:
+
+In real applications, service classes handle:
+- Checking whether an email already exists.
+- Validating availability.
+- Applying business rules.
+- Saving and retrieving data.
+- Coordinating multiple repositories.
+
+
+
+
+9. resources – Application Resources
+Stores application resources and configuration files.
+
+Examples:
+- application.properties
+- application.yml
+- Static files.
+- Templates.
+
+
+----2. Main Starting Point of Spring Boot Application
+Apart from these folders, there is one main Java file outside the folders, generally named:
+
+Application.java
+
+This is the starting point of your Spring Boot application.
+
+Example:
+@SpringBootApplication
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+
+
+What happens when you run this file?
+1. Java starts the application.
+2. Spring Boot initializes its application context.
+3. It scans components such as controllers, services and repositories.
+4. It creates and manages required objects (beans).
+5. It configures the application.
+6. The embedded Tomcat server starts.
+7. Your backend APIs become available.
+
+
+
+---3. Other Folders We Can Create
+These folders are optional. We can create them depending on project requirements.
+
+
+1. mapper – Data Mapping
+Converts DTOs into entities and vice versa.
+
+You can use:
+- Manual mapping.
+- MapStruct.
+
+
+2. validation – Input Validation
+Validates incoming information.
+
+For example:
+- Email validation.
+- Password validation.
+- Required fields.
+- Mobile number validation.
+
+
+3. util – Utility Classes
+Stores reusable helper methods, such as:
+- Date formatting.
+- Common utility functions.
+- Reusable methods.
+
+4. test – Testing
+Stores test classes for checking whether your application works correctly.
+
+For example:
+- Controller testing.
+- Service testing.
+- Repository testing.
+
+
+4. Remember – Most Important Backend Flow
+How Spring Boot Backend Works
+Frontend / Postman
+Request sent to backend
+
+Controller
+Receives requests
+
+Service
+Makes decisions and handles business logic
+
+Repository
+Communicates with the database
+
+Database (MySQL)
+Stores and retrieves data
+
+Response travels back to the frontend.
+
+Remember these three important points:
+Folder	Main Responsibility
+Controller	Receives requests
+Service	Makes decisions
+Repository	Communicates with the database
+
+
+5. Important Spring Boot Interview Questions and Answers
+Question	Simple Answer
+What is Controller?	It handles HTTP requests and responses.
+What is Service?	It contains business logic.
+What is Repository?	It communicates with the database.
+What is Entity?	It represents a database table.
+What is DTO?	It transfers data between application layers.
+What is Dependency Injection?	Spring automatically provides required objects.
+What is JPA?	Java Persistence API. It simplifies Java database operations.
+What is Hibernate?	It is an ORM framework that implements JPA.
+What is Spring Security?	It protects application resources.
+What is REST API?	It allows applications to communicate using HTTP.
+
+
+6. Quick Revision
+Remember the purpose of each folder:
+- config → Configuration
+- controller → API requests and responses
+- dto → Data transfer
+- exception → Error handling
+- model → Database entities
+- repository → Database operations
+- security → Authentication and authorization
+- service → Business logic
+- resources → Configuration files and resources
+- mapper → DTO and Entity conversion
+- validation → Input validation
+- util → Helper methods
+- test → Testing
+- Application.java → Starting point
